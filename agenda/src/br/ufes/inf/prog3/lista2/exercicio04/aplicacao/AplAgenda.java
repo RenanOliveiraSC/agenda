@@ -118,10 +118,6 @@ public class AplAgenda {
 		ContatoEmail mail = null;
 		System.out.println("Informe o tipo de contato que vc deseja: 1-Celular, 2-Comercial, 3-Residencial e 4-Email");
 		int tipo = Integer.valueOf(lerTeclado());
-		System.out.println("Informe o Nome");
-		String nome = lerTeclado();
-		System.out.println("Informe o número");
-		String contato = lerTeclado();
 
 		switch (tipo) {
 		case 1:
@@ -135,17 +131,25 @@ public class AplAgenda {
 			break;
 		case 4:
 			mail = new ContatoEmail();
-
+			break;
 		default:
 			System.out.println("Tipo incorreto!");
 			break;
 		}
+		System.out.println("Informe o Nome");
+		String nome = lerTeclado();
+		
+
 		if (cont != null) {
+			System.out.println("Informe o número");
+			String contato = lerTeclado();
 			cont.setNome(nome);
 			cont.setContato(contato);
 			adicionarContato(cont);
 		}
 		if (mail != null) {
+			System.out.println("Informe o e-mail");
+			String contato = lerTeclado();
 			mail.setNome(nome);
 			mail.setContato(contato);
 			mail.setTipo("E-mail");
