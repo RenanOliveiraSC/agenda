@@ -5,10 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import br.ufes.inf.prog3.lista2.exercicio04.dominio.Contato;
-import br.ufes.inf.prog3.lista2.exercicio04.dominio.ContatoTelefone;
+import br.ufes.inf.prog3.lista2.exercicio04.dominio.ContatoEmail;
 import br.ufes.inf.prog3.lista2.exercicio04.dominio.ContatoTelefoneCelular;
-import br.ufes.inf.prog3.lista2.exercicio04.dominio.ContatoTelefoneComercial;
-import br.ufes.inf.prog3.lista2.exercicio04.dominio.ContatoTelefoneResidencial;
 
 public class AplAgenda {
 
@@ -25,7 +23,7 @@ public class AplAgenda {
 	/** Obtém um contato, dado o índice. */
 	private static Contato obterContato(int indice) {
 		if (indice < contatos.size()) {
-			return (Contato) contatos.get(indice);
+			return contatos.get(indice);
 		} else {
 			return null;
 		}
@@ -37,7 +35,7 @@ public class AplAgenda {
 			System.out.println("\tAgenda vazia.");
 		} else {
 			for (int i = 0; i < contatos.size(); i++) {
-				Contato contato = (Contato) contatos.get(i);
+				Contato contato = contatos.get(i);
 				System.out.println("\t" + i + ": " + contato.getNome() + " (" + contato.getTipo() + ")");
 			}
 		}
@@ -110,6 +108,32 @@ public class AplAgenda {
 
 	/** Comando +T: adicionar telefone. */
 	public static void executarAdicionarTelefone() {
-		//TODO Criar a implementação para adicionar telefone
+		// TODO Criar a implementação para adicionar telefone
+
+		Contato cont = null;
+
+		System.out.println("Informe o tipo de contato que vc deseja: 1 ");
+		String tipo = lerTeclado();
+
+		String nome = lerTeclado();
+
+		String contato = lerTeclado();
+
+		switch (tipo) {
+		case "telefone celular":
+			cont = new ContatoTelefoneCelular();
+			break;
+		case "email":
+			cont = new ContatoEmail();
+		default:
+			System.out.println("Tipo incorreto!");
+			break;
+		}
+
+		cont.setNome(nome);
+		cont.setTipo(tipo);
+		cont.setContato(contato);
+
+		adicionarContato(cont);
 	}
 }
