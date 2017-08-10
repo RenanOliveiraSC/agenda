@@ -8,9 +8,4 @@ public interface Contato {
 
 	String getTipo();
 
-	void setNome(String nome);
-
-	void setTipo(String tipo);
-
-	void setContato(String contato);
 }

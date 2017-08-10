@@ -6,7 +6,10 @@ import java.util.Scanner;
 
 import br.ufes.inf.prog3.lista2.exercicio04.dominio.Contato;
 import br.ufes.inf.prog3.lista2.exercicio04.dominio.ContatoEmail;
+import br.ufes.inf.prog3.lista2.exercicio04.dominio.ContatoTelefone;
 import br.ufes.inf.prog3.lista2.exercicio04.dominio.ContatoTelefoneCelular;
+import br.ufes.inf.prog3.lista2.exercicio04.dominio.ContatoTelefoneComercial;
+import br.ufes.inf.prog3.lista2.exercicio04.dominio.ContatoTelefoneResidencial;
 
 public class AplAgenda {
 
@@ -36,7 +39,8 @@ public class AplAgenda {
 		} else {
 			for (int i = 0; i < contatos.size(); i++) {
 				Contato contato = contatos.get(i);
-				System.out.println("\t" + i + ": " + contato.getNome() + " (" + contato.getTipo() + ")");
+				System.out.println("\t" + i + ": " + contato.getNome() + " Tipo (" + contato.getTipo() + ") "
+						+ contato.getContato());
 			}
 		}
 		System.out.println();
@@ -110,30 +114,43 @@ public class AplAgenda {
 	public static void executarAdicionarTelefone() {
 		// TODO Criar a implementação para adicionar telefone
 
-		Contato cont = null;
-
-		System.out.println("Informe o tipo de contato que vc deseja: 1 ");
-		String tipo = lerTeclado();
-
+		ContatoTelefone cont = null;
+		ContatoEmail mail = null;
+		System.out.println("Informe o tipo de contato que vc deseja: 1-Celular, 2-Comercial, 3-Residencial e 4-Email");
+		int tipo = Integer.valueOf(lerTeclado());
+		System.out.println("Informe o Nome");
 		String nome = lerTeclado();
-
+		System.out.println("Informe o número");
 		String contato = lerTeclado();
 
 		switch (tipo) {
-		case "telefone celular":
+		case 1:
 			cont = new ContatoTelefoneCelular();
 			break;
-		case "email":
-			cont = new ContatoEmail();
+		case 2:
+			cont = new ContatoTelefoneComercial();
+			break;
+		case 3:
+			cont = new ContatoTelefoneResidencial();
+			break;
+		case 4:
+			mail = new ContatoEmail();
+
 		default:
 			System.out.println("Tipo incorreto!");
 			break;
 		}
+		if (cont != null) {
+			cont.setNome(nome);
+			cont.setContato(contato);
+			adicionarContato(cont);
+		}
+		if (mail != null) {
+			mail.setNome(nome);
+			mail.setContato(contato);
+			mail.setTipo("E-mail");
+			adicionarContato(mail);
+		}
 
-		cont.setNome(nome);
-		cont.setTipo(tipo);
-		cont.setContato(contato);
-
-		adicionarContato(cont);
 	}
 }
